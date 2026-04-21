@@ -1,6 +1,8 @@
 import ParticleCanvas from "@/app/components/ParticleCanvas";
 import AppWindowMock from "@/app/components/AppWindowMock";
-
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 const GITHUB = "https://github.com/TarunVishwakarma1/gotorrent";
 const RELEASES = `${GITHUB}/releases`;
 
@@ -132,15 +134,7 @@ function Nav() {
       }}
     >
       <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "0 24px",
-          height: 64,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
+        className="w-full max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between"
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -173,19 +167,18 @@ function Nav() {
         </div>
 
         {/* Links */}
-        <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+        <div className="hidden md:flex items-center gap-8">
           <a href="#features" className="nav-link">Features</a>
           <a href="#download" className="nav-link">Download</a>
-          <a
-            href={GITHUB}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-ghost"
-            style={{ padding: "8px 18px", fontSize: 13 }}
+          <Button
+            nativeButton={false}
+            render={<Link href={GITHUB} target="_blank" rel="noopener noreferrer" />}
+            variant="outline"
+            className="border-[rgba(0,212,255,0.35)] text-[var(--cyan)] hover:bg-[rgba(0,212,255,0.08)] hover:text-[var(--cyan)] shadow-[0_0_25px_rgba(0,212,255,0)] hover:shadow-[0_0_25px_rgba(0,212,255,0.2)] transition-all"
           >
             <GitHubIcon />
             GitHub
-          </a>
+          </Button>
         </div>
       </div>
     </nav>
@@ -226,17 +219,7 @@ function HeroSection() {
       />
 
       <div
-        style={{
-          position: "relative",
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "80px 24px",
-          width: "100%",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 64,
-          alignItems: "center",
-        }}
+        className="relative max-w-[1200px] mx-auto px-6 py-20 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
       >
         {/* Left: Text */}
         <div style={{ animation: "fade-up 0.7s ease forwards" }}>
@@ -294,15 +277,24 @@ function HeroSection() {
             that leave the rest behind.
           </p>
 
-          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href={RELEASES} target="_blank" rel="noopener noreferrer" className="btn-primary">
+          <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
+            <Button
+              nativeButton={false}
+              render={<Link href={RELEASES} target="_blank" rel="noopener noreferrer" />}
+              className="bg-gradient-to-br from-[#00d4ff] to-[#0055ff] text-[#020813] font-bold py-6 px-8 rounded-lg hover:scale-105 transition-transform hover:shadow-[0_15px_40px_rgba(0,212,255,0.5)] border-none"
+            >
               <DownloadIcon />
               Download Free
-            </a>
-            <a href={GITHUB} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+            </Button>
+            <Button
+              nativeButton={false}
+              render={<Link href={GITHUB} target="_blank" rel="noopener noreferrer" />}
+              variant="outline"
+              className="border-[rgba(0,212,255,0.35)] text-[var(--cyan)] py-6 px-8 rounded-lg hover:bg-[rgba(0,212,255,0.08)] hover:text-[var(--cyan)] hover:shadow-[0_0_25px_rgba(0,212,255,0.2)] bg-transparent transition-all"
+            >
               <GitHubIcon />
               View on GitHub
-            </a>
+            </Button>
           </div>
 
           <p
@@ -339,38 +331,21 @@ function StatsBar() {
       }}
     >
       <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "0 24px",
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-        }}
+        className="w-full max-w-[1200px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4"
       >
         {STATS.map((s, i) => (
           <div
             key={i}
-            style={{
-              padding: "28px 24px",
-              textAlign: "center",
-              borderRight:
-                i < STATS.length - 1
-                  ? "1px solid rgba(0,212,255,0.1)"
-                  : "none",
-            }}
+            className={`py-8 px-6 text-center ${
+              i % 2 === 0 ? "border-r" : ""
+            } md:border-r border-[rgba(0,212,255,0.1)] last:border-r-0`}
           >
             <div
-              className="glow-cyan"
-              style={{
-                fontSize: 32,
-                fontWeight: 800,
-                fontFamily: "var(--font-geist-mono)",
-                letterSpacing: "-0.02em",
-              }}
+              className="glow-cyan text-[32px] font-extrabold font-mono -tracking-wider"
             >
               {s.value}
             </div>
-            <div style={{ color: "var(--muted)", fontSize: 13, marginTop: 4 }}>
+            <div className="text-[var(--muted)] text-[13px] mt-1">
               {s.label}
             </div>
           </div>
@@ -420,44 +395,27 @@ function FeaturesSection() {
       </div>
 
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 20,
-        }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         {FEATURES.map((f, i) => (
-          <div key={i} className="card">
-            <div
-              style={{
-                width: 52,
-                height: 52,
-                borderRadius: 12,
-                background: `${f.accent}12`,
-                border: `1px solid ${f.accent}30`,
-                display: "grid",
-                placeItems: "center",
-                fontSize: 24,
-                marginBottom: 20,
-              }}
-            >
-              {f.icon}
-            </div>
-            <h3
-              style={{
-                fontSize: 18,
-                fontWeight: 700,
-                color: "#fff",
-                marginBottom: 10,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              {f.title}
-            </h3>
-            <p style={{ color: "#8a9ab0", fontSize: 14, lineHeight: 1.7 }}>
-              {f.desc}
-            </p>
-          </div>
+          <Card key={i} className="bg-[rgba(0,18,38,0.55)] border-[rgba(0,212,255,0.15)] backdrop-blur-sm hover:border-[rgba(0,212,255,0.5)] hover:shadow-[0_0_35px_rgba(0,212,255,0.12),inset_0_0_20px_rgba(0,212,255,0.03)] hover:-translate-y-1 transition-all duration-300">
+            <CardHeader className="pb-2">
+              <div
+                className="w-[52px] h-[52px] rounded-xl flex items-center justify-center text-2xl mb-2"
+                style={{ background: `${f.accent}12`, border: `1px solid ${f.accent}30` }}
+              >
+                {f.icon}
+              </div>
+              <CardTitle className="text-lg font-bold text-white -tracking-tight">
+                {f.title}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-[#8a9ab0] text-sm leading-relaxed">
+                {f.desc}
+              </p>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </section>
@@ -496,57 +454,33 @@ function HowItWorksSection() {
         </div>
 
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 24,
-          }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           {STEPS.map((step, i) => (
-            <div key={i} style={{ position: "relative" }}>
+            <div key={i} className="relative">
               {i < STEPS.length - 1 && (
                 <div
-                  style={{
-                    position: "absolute",
-                    top: 28,
-                    right: -12,
-                    width: 24,
-                    height: 1,
-                    background:
-                      "linear-gradient(90deg,rgba(0,212,255,0.4),rgba(0,212,255,0.1))",
-                    zIndex: 1,
-                  }}
+                  className="hidden md:block absolute top-[28px] -right-[16px] w-[32px] h-[1px] bg-gradient-to-r from-[rgba(0,212,255,0.4)] to-[rgba(0,212,255,0.1)] z-10"
                 />
               )}
 
-              <div className="card" style={{ height: "100%" }}>
-                <div
-                  style={{
-                    fontFamily: "var(--font-geist-mono)",
-                    fontSize: 40,
-                    fontWeight: 900,
-                    color: "rgba(0,212,255,0.12)",
-                    lineHeight: 1,
-                    marginBottom: 16,
-                    letterSpacing: "-0.04em",
-                  }}
-                >
-                  {step.num}
-                </div>
-                <h3
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 700,
-                    color: "#fff",
-                    marginBottom: 14,
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p style={{ color: "#8a9ab0", fontSize: 14, lineHeight: 1.7 }}>
-                  {step.desc}
-                </p>
-              </div>
+              <Card className="h-full bg-[rgba(0,18,38,0.55)] border-[rgba(0,212,255,0.15)] backdrop-blur-sm hover:border-[rgba(0,212,255,0.5)] hover:shadow-[0_0_35px_rgba(0,212,255,0.12),inset_0_0_20px_rgba(0,212,255,0.03)] hover:-translate-y-1 transition-all duration-300">
+                <CardContent className="pt-6">
+                  <div
+                    className="font-mono text-[40px] font-black text-[rgba(0,212,255,0.12)] leading-none mb-4 -tracking-wider"
+                  >
+                    {step.num}
+                  </div>
+                  <h3
+                    className="text-xl font-bold text-white mb-3"
+                  >
+                    {step.title}
+                  </h3>
+                  <p className="text-[#8a9ab0] text-sm leading-relaxed">
+                    {step.desc}
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           ))}
         </div>
@@ -594,69 +528,53 @@ function DownloadSection() {
       </div>
 
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 24,
-          marginBottom: 48,
-        }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
       >
         {PLATFORMS.map((p, i) => (
-          <div
+          <Card
             key={i}
-            className="card"
-            style={{ textAlign: "center", padding: "40px 28px" }}
+            className="text-center px-6 py-10 bg-[rgba(0,18,38,0.55)] border-[rgba(0,212,255,0.15)] backdrop-blur-sm hover:border-[rgba(0,212,255,0.5)] hover:shadow-[0_0_35px_rgba(0,212,255,0.12),inset_0_0_20px_rgba(0,212,255,0.03)] hover:-translate-y-1 transition-all duration-300"
           >
-            <div style={{ fontSize: 48, marginBottom: 16 }}>{p.icon}</div>
+            <div className="text-5xl mb-4">{p.icon}</div>
             <h3
-              style={{
-                fontSize: 22,
-                fontWeight: 700,
-                color: "#fff",
-                marginBottom: 6,
-              }}
+              className="text-[22px] font-bold text-white mb-2"
             >
               {p.name}
             </h3>
             <p
-              style={{
-                color: "var(--muted)",
-                fontSize: 13,
-                marginBottom: 28,
-                fontFamily: "var(--font-geist-mono)",
-              }}
+              className="text-[var(--muted)] text-[13px] mb-7 font-mono"
             >
               {p.sub}
             </p>
             <div
-              style={{ display: "flex", gap: 10, justifyContent: "center" }}
+              className="flex flex-wrap gap-2 justify-center"
             >
               {p.formats.map((fmt) => (
-                <a
+                <Button
                   key={fmt}
-                  href={RELEASES}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-download"
+                  nativeButton={false}
+                  render={<Link href={RELEASES} target="_blank" rel="noopener noreferrer" />}
+                  variant="outline"
+                  className="bg-[rgba(0,212,255,0.05)] border-[rgba(0,212,255,0.3)] text-[var(--cyan)] hover:bg-[rgba(0,212,255,0.13)] hover:text-[var(--cyan)] hover:border-[var(--cyan)] hover:shadow-[0_0_18px_rgba(0,212,255,0.2)] transition-all h-9 px-4"
                 >
                   <DownloadIcon size={14} />
                   {fmt}
-                </a>
+                </Button>
               ))}
             </div>
-          </div>
+          </Card>
         ))}
       </div>
 
       <div style={{ textAlign: "center" }}>
-        <a
-          href={RELEASES}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-ghost"
+        <Button
+          nativeButton={false}
+          render={<Link href={RELEASES} target="_blank" rel="noopener noreferrer" />}
+          variant="outline"
+          className="border-[rgba(0,212,255,0.35)] text-[var(--cyan)] py-6 px-8 rounded-lg hover:bg-[rgba(0,212,255,0.08)] hover:text-[var(--cyan)] hover:shadow-[0_0_25px_rgba(0,212,255,0.2)] bg-transparent transition-all"
         >
-          View all releases on GitHub →
-        </a>
+          View all releases on GitHub &rarr;
+        </Button>
       </div>
     </section>
   );
@@ -674,36 +592,21 @@ function Footer() {
       }}
     >
       <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: 24,
-        }}
+        className="w-full max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
       >
-        <div>
+        <div className="text-center md:text-left">
           <div
-            style={{
-              fontFamily: "var(--font-geist-mono)",
-              fontWeight: 700,
-              fontSize: 16,
-              color: "#fff",
-              marginBottom: 8,
-            }}
+            className="font-mono font-bold text-base text-white mb-2"
           >
             GoTorrent
           </div>
-          <p style={{ color: "var(--muted)", fontSize: 13 }}>
+          <p className="text-[var(--muted)] text-[13px]">
             A Go project by{" "}
             <a
               href="https://github.com/TarunVishwakarma1"
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-link"
-              style={{ color: "var(--cyan)" }}
+              className="text-[var(--cyan)] hover:text-white transition-colors"
             >
               TarunVishwakarma1
             </a>
@@ -711,15 +614,15 @@ function Footer() {
           </p>
         </div>
 
-        <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-          <a href={GITHUB} target="_blank" rel="noopener noreferrer" className="footer-link">
+        <div className="flex gap-6 items-center flex-wrap justify-center">
+          <a href={GITHUB} target="_blank" rel="noopener noreferrer" className="footer-link hover:text-[var(--cyan)] transition-colors text-[13px]">
             GitHub
           </a>
-          <a href={RELEASES} target="_blank" rel="noopener noreferrer" className="footer-link">
+          <a href={RELEASES} target="_blank" rel="noopener noreferrer" className="footer-link hover:text-[var(--cyan)] transition-colors text-[13px]">
             Releases
           </a>
-          <span style={{ color: "var(--muted)", fontSize: 13 }}>
-            © 2025 GoTorrent
+          <span className="text-[var(--muted)] text-[13px]">
+            &copy; 2025 GoTorrent
           </span>
         </div>
       </div>
