@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gotorrent.tarunvishwakarma.dev"),
   title: "GoTorrent — The Go-Powered Terminal Torrent Client",
   description:
     "Blazing-fast, cross-platform torrent downloads from the command line. Written in Go. No GUI. No bloat.",
@@ -25,12 +26,36 @@ export const metadata: Metadata = {
     "terminal",
     "cross-platform",
     "magnet",
+    "p2p",
+    "bittorrent"
   ],
+  authors: [{ name: "Tarun Vishwakarma", url: "https://github.com/TarunVishwakarma1" }],
   openGraph: {
     title: "GoTorrent — The Go-Powered Terminal Torrent Client",
     description:
       "Blazing-fast, cross-platform torrent downloads from the command line.",
     type: "website",
+    url: "https://gotorrent.tarunvishwakarma.dev",
+    siteName: "GoTorrent",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GoTorrent — The Go-Powered Terminal Torrent Client",
+    description: "Blazing-fast, cross-platform torrent downloads from the command line.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://gotorrent.tarunvishwakarma.dev",
   },
 };
 
